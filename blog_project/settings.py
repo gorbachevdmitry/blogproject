@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,6 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'taggit',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -103,5 +107,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets/static/'),
+)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets/media/')
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dmitrylubimov380@gmail.com'
+EMAIL_HOST_PASSWORD = '222qqwwee'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr/blog'
+    },
+}
